@@ -8,7 +8,7 @@
     push: placing data unto stack
     pop: removing top element of the stack
     peek: displaying top element in stack
-    size/length: determinign elements on the stack
+    size: determinign elements on the stack
 
   E.g Prime example of a stack in JavaScript is the Array object has all the options of a stack
 
