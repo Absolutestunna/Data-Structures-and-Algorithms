@@ -39,7 +39,7 @@ class BST {
     let node = this.root;
 
     //check for root node
-    if (node === null){
+    if (node == null){
       this.root = new Node(data);
       return;
     } else {
@@ -72,7 +72,7 @@ class BST {
       return searchTree(node);
     }
 
-  }
+  } //end of add
 
   remove(data){
 
@@ -89,57 +89,124 @@ class BST {
         - else, search the tree recursively
     */
 
-
-
     const removeNode = function(node, data){
 
-      //check for existence of tree
-      if (!node) {
+      if (!node){
         return null;
       }
 
       if (node.data == data){
 
-        if (node.left == null && node.right == null){
-          return null
+        if (node.right == null && node.left == null){
+          return null;
         }
         if (node.right == null){
-          return node.left
+          return node.left;
         }
         if (node.left == null) {
-          return node.right
+          return node.right;
         }
 
-        var tempNode = node.right;
+        //check for node with 2 children
 
-        //check for left most node with inquired data
-        while (tempNode.left !== null) {
+        var tempNode = node.right;
+        while (node.left !== null){
           tempNode = tempNode.left;
         }
 
-        //set node with new data
         node.data = tempNode.data;
 
-        //reconstruct the children right references to nodes
         node.right = removeNode(node.right, tempNode.data);
         return node;
 
-      } else if (node.data < data){
-        // going right
-
+      } else if (node.data < data) {
         node.right = removeNode(node.right, data);
         return node;
-
-
       } else {
-        //going left
-
         node.left = removeNode(node.left, data);
         return node;
       }
     }
+
     this.root = removeNode(this.root, data);
   } //end of remove
+
+  inOrder(){
+
+    /*
+
+    Tra­verse the left sub­tree by recur­sively call­ing the traverseTreeInOrder function
+    Save the data part of root ele­ment (or cur­rent element)
+    Tra­verse the right sub­tree by recur­sively call­ing the in-order function
+
+    */
+
+    if (this.root == null){
+      return null;
+    } else {
+      const result = new Array;
+
+      function traverseTreeInOrder(node){
+        node.left && traverseTreeInOrder(node.left);
+        result.push(node.data);
+        node.right && traverseTreeInOrder(node.right);
+      }
+      traverseTreeInOrder(this.root);
+      return result;
+    }
+  }
+
+  preOrder(){
+
+    /*
+    Save the data part of root ele­ment (or cur­rent element)
+    Tra­verse the left sub­tree by recur­sively call­ing the traverseTreePreOrder function.
+    Tra­verse the right sub­tree by recur­sively call­ing the traverseTreePreOrder function
+    */
+
+    if (this.root == null){
+      return null;
+    } else {
+      const result = new Array();
+
+      function traverseTreePreOrder(node){
+        result.push(node.data);
+        node.left && traverseTreePreOrder(node.left);
+        node.right && traverseTreePreOrder(node.right);
+
+      }
+
+      traverseTreePreOrder(this.root);
+      return result;
+    }
+
+  }
+
+  postOrder(){
+
+    /*
+    Tra­verse the left sub­tree by recur­sively call­ing the traverseTreePreOrder function.
+    Tra­verse the right sub­tree by recur­sively call­ing the traverseTreePreOrder function
+    Save the data part of root ele­ment (or cur­rent element)
+    */
+
+    if (this.root == null){
+      return null;
+    } else {
+      const result = new Array();
+
+      function traversePostOrder(node){
+        node.left && traverseTreePreOrder(node.left);
+        node.right && traverseTreePreOrder(node.right);
+        result.push(node.data);
+
+      }
+      traversePostOrder(this.root);
+      return result;
+
+    }
+
+  }
 
   findMin(){
 
@@ -178,30 +245,3 @@ class BST {
   }
 
 } //end of BST
-
-
-
-/*
-
-
-  isPresent(data){
-
-    //set the current, default, node to the root node
-    let current = this.root;
-
-    //"recursively" check if data === current.data; update current node with corresponding child nodes
-    while (current !== null) {
-      if (data === current.data){
-        return true;
-      }
-      if (data < current.data){
-        current = current.left;
-      }
-      if (data > current.data){
-        current = current.right;
-      }
-    }
-    return false;
-  }
-
-*/
