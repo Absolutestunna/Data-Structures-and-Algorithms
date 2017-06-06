@@ -110,7 +110,7 @@ class BST {
         //check for node with 2 children
 
         var tempNode = node.right;
-        while (node.left !== null){
+        while (tempNode.left !== null){
           tempNode = tempNode.left;
         }
 
@@ -229,7 +229,7 @@ class BST {
 
   isPresent(data){
 
-    let node = this.root;
+    let current = this.root;
 
     while (current !== null) {
       if (current.data < data){
@@ -245,3 +245,24 @@ class BST {
   }
 
 } //end of BST
+
+var bst = new BST();
+bst.add(3);
+bst.add(2);
+bst.add(4);
+bst.add(1);
+bst.add(5);
+
+//traversal functions
+bst.inOrder(); //An inorder traversal visits all of the nodes of a BST in ascending order of the node key values.
+bst.preOrder(); //A preorder traversal visits the root node first, followed by the nodes in the subtrees
+// under the left child of the root node, followed by the nodes in the subtrees under
+// the right child of the root node.
+bst.postOrder(); //A postorder traversal visits all of the child nodes of the
+// left subtree up to the root node, and then visits all of the child nodes of the right subtree
+// up to the root node.
+
+//search functions
+bst.findMin();
+bst.findMax();
+bst.isPresent(1);

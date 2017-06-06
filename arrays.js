@@ -68,7 +68,7 @@ function weekAverage(weekNumber){
   var total = weekSelectedArray.reduce(function(temp1, temp2){
     return temp1 + temp2
   })
-  return Number((total / weekSelectedArray.length).toFixed(2));
+  return Number((total / weekSelectedArray.length).toFixed(2));   //convert string "number" to a number.
 }
 
 function allWeeksAverage(){
@@ -94,6 +94,16 @@ newMonthTemps.addWeek([52, 50, 90, 44, 89, 10, 99]);
 newMonthTemps.addWeek([54, 20, 60, 54, 90, 100, 79]);
 newMonthTemps.addWeek([55, 90, 60, 14, 190, 20, 88]);
 newMonthTemps.addWeek([14, 30, 50, 74, 92, 20, 79]);
-// newMonthTemps.weekAverage(3);
-// newMonthTemps.allWeeksAverage();
+newMonthTemps.weekAverage(3);
+newMonthTemps.allWeeksAverage();
 newMonthTemps.monthAverage();
+
+// 4. Create an object that stores individual letters in an array and has a function for
+// displaying the letters as a single word.
+
+var wordArray = ["For", "Your", "Information"];
+var firstLetterWord = [];
+for (var i = 0; i < wordArray.length; i++) {
+  firstLetterWord.push(wordArray[i][0])
+}
+firstLetterWord.join('s');
